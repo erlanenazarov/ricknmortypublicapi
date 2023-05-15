@@ -82,7 +82,7 @@ export const LocationListContainer = (): JSX.Element => {
         ]}
       />
 
-      <div className={styles.filterWr}>
+      <div className="filters-title">
         <Title level={3}>Browse locations</Title>
         <Filters
           name={FORM_NAME}

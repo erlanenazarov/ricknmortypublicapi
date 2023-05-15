@@ -1,4 +1,4 @@
-export type TActionReturnType<T> = {
+export type TActionReturnType<T = void> = {
   type: string;
   payload?: T;
 };

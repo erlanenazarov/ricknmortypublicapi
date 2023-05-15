@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Breadcrumb from 'antd/lib/breadcrumb';
@@ -28,10 +28,11 @@ import {
 } from 'store/characters/selectors';
 import { IEpisode } from 'store/episodes/types';
 
+import { useChunkView } from 'hooks/useChunkView';
+
 import { safeGet } from 'utils/safeGet';
 
 import { Preview } from './components/Preview';
-import { DEFAULT_OFFSET } from './constants';
 import styles from './CharacterDetail.module.css';
 
 const { Title } = Typography;
@@ -41,14 +42,13 @@ export const CharacterDetailContainer = (): JSX.Element => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [showMoreOffset, setShowMoreOffset] = useState(DEFAULT_OFFSET);
-
   const isLoading = useSelector(makeSelectCharacterDetailLoading);
   const character = useSelector(makeSelectCharacterDetailData);
   const episodes: IEpisode[] = safeGet(character, 'episode', []);
   const originId: string | null = safeGet(character, 'origin.id', null);
 
-  const isShowMoreButtonShown: boolean = episodes.length > DEFAULT_OFFSET;
+  const [chunkedEpisodes, isButtonVisible, offset, addOffset] =
+    useChunkView(episodes);
 
   const infoDataItems = [
     { label: 'Gender', value: safeGet(character, 'gender') },
@@ -73,13 +73,6 @@ export const CharacterDetailContainer = (): JSX.Element => {
       ),
     },
   ];
-
-  const handleAddOffset = (): void => {
-    setShowMoreOffset(prev => {
-      if (prev >= episodes.length) return DEFAULT_OFFSET;
-      return prev + DEFAULT_OFFSET;
-    });
-  };
 
   const handleNavigateToEpisodePage = (id: string): void => {
     navigate(`${EPISODES_PAGE_URL}/${id}`);
@@ -118,7 +111,7 @@ export const CharacterDetailContainer = (): JSX.Element => {
       )}
 
       <div className={styles.characterRoot}>
-        <div>
+        <div className={styles.previewWr}>
           <Preview isLoading={isLoading} image={safeGet(character, 'image')} />
 
           <InfoText isLoading={isLoading} items={infoDataItems} />
@@ -135,14 +128,14 @@ export const CharacterDetailContainer = (): JSX.Element => {
             )}
           </Title>
           <Episodes
-            data={episodes.slice(0, showMoreOffset)}
+            data={chunkedEpisodes}
             isLoading={isLoading}
             onClick={handleNavigateToEpisodePage}
           />
-          {isShowMoreButtonShown && (
+          {isButtonVisible && (
             <div className={styles.showMoreWr}>
-              <Button type="primary" onClick={handleAddOffset}>
-                {showMoreOffset >= episodes.length ? 'Hide' : 'Show more'}
+              <Button type="primary" onClick={addOffset}>
+                {offset >= episodes.length ? 'Hide' : 'Show more'}
               </Button>
             </div>
           )}

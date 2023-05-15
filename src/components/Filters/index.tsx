@@ -1,5 +1,4 @@
-import { useRef, useState, useEffect, ReactNode } from 'react';
-import { createPortal } from 'react-dom';
+import { useRef, useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import cn from 'classnames';
 import Tooltip from 'antd/lib/tooltip';
@@ -7,6 +6,8 @@ import Typography from 'antd/lib/typography';
 import Popover from 'antd/lib/popover';
 import Button from 'antd/lib/button';
 import Input from 'antd/lib/input';
+import FloatButton from 'antd/lib/float-button';
+import Badge from 'antd/lib/badge';
 import FilterOutlined from '@ant-design/icons/FilterOutlined';
 
 import { Form } from 'components/Form';
@@ -14,7 +15,7 @@ import { getSingleValue } from 'components/Form/utils';
 import { TFormValues } from 'components/Form/types';
 
 import { makeSelectFormValues } from 'store/forms/selectors';
-import { initForm, removeForm } from 'store/forms/actions';
+import { initForm, removeForm, changeFormField } from 'store/forms/actions';
 
 import { safeGet } from 'utils/safeGet';
 
@@ -41,61 +42,25 @@ export const Filters = (props: IFiltersProps): JSX.Element => {
     safeGet(filterValues, searchField || 'name', []),
   );
 
+  const activeFilterCount = Object.values(filterValues).filter(
+    value => value.length && value[0],
+  ).length;
+
   const handleSubmit = (values: TFormValues): void => {
     if (!onSubmit) return;
     onSubmit(values);
     setIsPopoverOpen(false);
   };
 
-  const renderButton = (): ReactNode => {
-    const filterForm = (
-      <div>
-        <Title level={4} className={styles.filterTitle}>
-          Filters
-        </Title>
-        <Form<IFilterConfigContext>
-          name={formName}
-          labelCol={{ span: 7 }}
-          wrapperCol={{ span: 18 }}
-          initialValues={initialValues}
-          configContext={{ isFixed: fixed }}
-          config={config}
-          onSubmit={handleSubmit}
-          submitButtonText="Apply filters"
-          includeSubmitButton
-        />
-      </div>
-    );
-
-    const button = (
-      <div className={cn({ [styles.fixedFilterTrigger]: fixed })}>
-        <Tooltip title="Filters">
-          <Popover
-            content={filterForm}
-            trigger="click"
-            placement="bottomRight"
-            style={{ minWidth: '100%' }}
-            open={isPopoverOpen}
-            onOpenChange={setIsPopoverOpen}
-          >
-            <Button
-              className={cn({ [styles.fixedButton]: fixed })}
-              size={fixed ? 'large' : 'middle'}
-              type="primary"
-              shape="circle"
-              icon={<FilterOutlined />}
-            />
-          </Popover>
-        </Tooltip>
-      </div>
-    );
-
-    if (!fixed) return button;
-    return createPortal(button, document.body);
-  };
-
   const handleSearch = (value: string): void => {
     if (!searchField) return;
+    dispatch(
+      changeFormField({
+        name: formName,
+        field: searchField,
+        value: value ? [value] : [],
+      }),
+    );
     handleSubmit({
       ...filterValues,
       [searchField]: [value].filter(Boolean),
@@ -124,7 +89,7 @@ export const Filters = (props: IFiltersProps): JSX.Element => {
         window.removeEventListener('scroll', listener);
       };
     },
-    // Need to call this effect only once
+    // Need to call this effect only when `fixed` is changed
     // eslint-disable-next-line
     [fixed],
   );
@@ -153,7 +118,52 @@ export const Filters = (props: IFiltersProps): JSX.Element => {
           allowClear
         />
       )}
-      {renderButton()}
+      <Tooltip title="Filters">
+        <Popover
+          content={
+            <div>
+              <Title level={4} className={styles.filterTitle}>
+                Filters
+              </Title>
+              <Form<IFilterConfigContext>
+                name={formName}
+                labelCol={{ span: 7 }}
+                wrapperCol={{ span: 18 }}
+                initialValues={initialValues}
+                configContext={{ isFixed: fixed }}
+                config={config}
+                onSubmit={handleSubmit}
+                submitButtonText="Apply filters"
+                includeSubmitButton
+              />
+            </div>
+          }
+          trigger="click"
+          placement="bottomRight"
+          style={{ minWidth: '100%' }}
+          open={isPopoverOpen}
+          onOpenChange={setIsPopoverOpen}
+        >
+          {fixed ? (
+            <FloatButton
+              badge={{
+                count: activeFilterCount,
+              }}
+              icon={<FilterOutlined size={32} />}
+              type="primary"
+            />
+          ) : (
+            <Badge color="red" count={activeFilterCount}>
+              <Button
+                size="middle"
+                type="primary"
+                shape="circle"
+                icon={<FilterOutlined />}
+              />
+            </Badge>
+          )}
+        </Popover>
+      </Tooltip>
     </div>
   );
 };

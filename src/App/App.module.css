@@ -1,11 +1,22 @@
+:root {
+  --app-spacing: 50px;
+}
+
 .root {
   min-height: 100vh;
 }
 
 .header {
   background: white;
+  padding-inline: var(--app-spacing);
 }
 
 .content {
-  padding-inline: 50px;
+  padding-inline: var(--app-spacing);
+}
+
+@media screen and (max-width: 560px) {
+  :root {
+    --app-spacing: 18px;
+  }
 }

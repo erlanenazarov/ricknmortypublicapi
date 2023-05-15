@@ -23,6 +23,7 @@
   "devDependencies": {
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
+    "@testing-library/react-hooks": "^8.0.1",
     "@testing-library/user-event": "13.5.0",
     "@types/jest": "27.5.2",
     "@types/lodash": "4.14.186",
@@ -43,6 +44,7 @@
     "eslint-plugin-react-hooks": "4.3.0",
     "gh-pages": "^5.0.0",
     "husky": "4.3.8",
+    "jest-immutable-matchers": "^3.0.0",
     "lint-staged": "11.2.6",
     "prettier": "2.5.1"
   },
@@ -77,7 +79,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn run test"
     }
   }
 }

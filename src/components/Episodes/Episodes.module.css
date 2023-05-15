@@ -15,10 +15,21 @@
   background-color: rgba(0, 0, 0, 0.06);
 }
 
+.episodeMeta {
+  width: 100%;
+}
+
 .skeleton {
   margin-bottom: 24px;
 }
 
 .skeleton :global(.ant-skeleton-input) {
   height: 80px !important;
+}
+
+@media screen and (max-width: 600px) {
+  .episodeItem {
+    flex-flow: column nowrap;
+    align-items: flex-start !important;
+  }
 }
