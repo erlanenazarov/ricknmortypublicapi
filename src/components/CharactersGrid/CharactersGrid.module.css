@@ -1,0 +1,50 @@
+:root {
+  --column-width: minmax(290px, 1fr);
+}
+
+.gridRoot {
+  margin: 0 -8px 0 -8px;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-columns: min-content;
+}
+
+.gridItem {
+  padding: 8px;
+  position: relative;
+  width: 100%;
+}
+
+.card {
+  height: 100%;
+}
+
+.emptyLoading {
+  width: 100%;
+  min-height: 360px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 712px) {
+  .gridRoot {
+    grid-template-columns: repeat(2, var(--column-width));
+  }
+}
+@media screen and (min-width: 1000px) {
+  .gridRoot {
+    grid-template-columns: repeat(3, var(--column-width));
+  }
+}
+@media screen and (min-width: 1288px) {
+  .gridRoot {
+    grid-template-columns: repeat(4, var(--column-width));
+  }
+}
+@media screen and (min-width: 1554px) {
+  .gridRoot {
+    grid-template-columns: repeat(5, var(--column-width));
+  }
+}

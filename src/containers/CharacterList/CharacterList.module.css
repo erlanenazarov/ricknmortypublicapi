@@ -1,0 +1,23 @@
+.root {
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+
+.breadcrumbs {
+  margin-bottom: 24px;
+}
+
+.filtersWr {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.pagination {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  padding-top: 24px;
+}

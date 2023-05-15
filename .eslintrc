@@ -1,0 +1,134 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "prettier", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "eol-last": ["error", "always"],
+    "no-console": "warn",
+    "semi": ["error", "always"],
+    "object-curly-spacing": ["error", "always"],
+    "computed-property-spacing": ["error", "never"],
+    "space-in-parens": ["error", "never"],
+    "react/react-in-jsx-scope": "off",
+    "react/prop-types": 0,
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all",
+        "args": "all",
+        "varsIgnorePattern": "^jsx$",
+        "argsIgnorePattern": "[Ii]gnored$"
+      }
+    ],
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "prettier/prettier": ["warn", {
+      "endOfLine": "lf",
+      "singleQuote": true
+    }],
+    "func-style": "off",
+    "wrap-iife": "warn",
+    "no-loop-func": "error",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ],
+        "pathGroups": [
+          {
+            "pattern": "api/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "api",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "configuration/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "components/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "containers/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "pages/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "store/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "store",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "hooks/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "utils/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
+            "pattern": "../../../**",
+            "group": "parent",
+            "position": "after"
+          },
+          {
+            "pattern": "../../**",
+            "group": "parent",
+            "position": "after"
+          },
+          {
+            "pattern": "../**",
+            "group": "parent",
+            "position": "after"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [
+          "builtin"
+        ],
+        "newlines-between": "always"
+      }
+    ],
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "env": {
+    "browser": true
+  },
+  "ignorePatterns": ["!.storybook"]
+}

@@ -1,0 +1,25 @@
+.root {
+  width: 300px;
+  height: 280px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 24px;
+}
+
+.root :global(.ant-image) {
+  min-width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.root :global(.ant-skeleton) {
+  width: 100%;
+}
+
+.skeleton {
+  width: 100% !important;
+  height: 100% !important;
+}

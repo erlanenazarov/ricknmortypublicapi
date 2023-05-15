@@ -1,0 +1,10 @@
+.root {
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+
+.filterWr {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}

@@ -1,0 +1,24 @@
+.episodeItem {
+  cursor: pointer;
+  transition: background-color 0.5s ease-out;
+}
+
+.episodeItem:first-child {
+  border-radius: 8px 8px 0 0;
+}
+
+.episodeItem:last-child {
+  border-radius: 0 0 8px 8px;
+}
+
+.episodeItem:hover {
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.skeleton {
+  margin-bottom: 24px;
+}
+
+.skeleton :global(.ant-skeleton-input) {
+  height: 80px !important;
+}

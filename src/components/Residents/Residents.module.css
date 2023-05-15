@@ -1,0 +1,18 @@
+.residentsHead {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.residentsTitle {
+  margin: 0 !important;
+}
+
+.showMoreWr {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: center;
+  margin-top: 24px;
+}

@@ -1,0 +1,44 @@
+.root {
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+
+.characterRoot {
+  margin-top: 24px;
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 32px;
+}
+
+.episodesHead {
+  margin-top: 0;
+}
+
+.episodesCountBadge {
+  margin-left: 8px;
+}
+
+.infoRoot {
+  flex: 1 1 0;
+}
+
+.titleWr {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.title {
+  margin: 0 !important;
+}
+
+.showMoreWr {
+  margin-top: 24px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+

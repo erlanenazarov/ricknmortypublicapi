@@ -1,46 +1,35 @@
-# Getting Started with Create React App
+# Рейтинг HSE
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Проект был создан с помощью [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+## Версия Node и пакетный менеджер
 
-In the project directory, you can run:
+- Версия *NodeJS* для этого проекта **v14.20.1**
+- В проекте используется пакетный менеджер Yarn (**v1.22.19**), просьба использовать только его для установки зависимостей и прочих операций с пакетным менеджером.
+- Файл **yarn.lock** обязательно должен присутствовать в репозитории проекта. Просьба соблюдать единый вид этого файла. (Для этого у вас должна быть в точности такая же версия NodeJS и yarn.)
 
-### `npm start`
+### В случае возникновения проблем с yarn.lock
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- Удалите папку `node_modules/`
+- Отчистите кэш yarn `~# yarn cache clean`
+- Верните начальное состояние файла `yarn.lock`: `~# git checkout yarn.lock`
+- Установите зависимости командой `~# yarn install`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Зависимости
 
-### `npm test`
+Зависимости, которые добавляют типы а так же относятся к разработке (Библиотеки тестирования, eslint и т.д.), сохраняем в `devDependencies` (Типы и прочие библиотеки для ведения разработки не нужны в минифицированном билде)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+```json
+{
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-scripts": "5.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "18.0.21",
+    "@types/react-dom": "18.0.6",
+    "typescript": "4.8.4"
+  }
+}
+```

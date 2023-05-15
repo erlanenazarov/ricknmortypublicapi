@@ -1,0 +1,11 @@
+.root {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 16px;
+}
+
+.formItem {
+  margin-bottom: 0;
+}
