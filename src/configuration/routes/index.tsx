@@ -1,4 +1,4 @@
-import { createBrowserRouter as createRouter } from 'react-router-dom';
+import { createHashRouter as createRouter } from 'react-router-dom';
 import { AppContainer } from 'App';
 
 import { ErrorContainer } from 'containers/Error';

@@ -14,7 +14,6 @@ jobs:
           node-version: "16.x"
       - run: yarn
       - run: yarn build
-      - run: touch build/.nojekyll
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v1
         with:
