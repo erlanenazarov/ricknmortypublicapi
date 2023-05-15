@@ -1,4 +1,4 @@
-# Рейтинг HSE
+# Реализация Rick&Morty API
 
 Проект был создан с помощью [Create React App](https://github.com/facebook/create-react-app).
 
@@ -24,12 +24,12 @@
   "dependencies": {
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "typescript": "4.8.4"
   },
   "devDependencies": {
     "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6",
-    "typescript": "4.8.4"
+    "@types/react-dom": "18.0.6"
   }
 }
 ```
