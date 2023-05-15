@@ -92,7 +92,7 @@ export const EpisodeListContainer = (): JSX.Element => {
         ]}
       />
 
-      <div className={styles.filtersWr}>
+      <div className="filters-title">
         <Title level={3}>Browse episodes</Title>
         <Filters
           name={FORM_NAME}

@@ -32,11 +32,8 @@ export interface IPayloadAction<P = void, T extends string = string> {
   type: T;
 }
 
-export declare type THandler<T, S = void> = (
-  state: T,
-  action: IPayloadAction<S>,
-) => T;
-export declare type THandlers<T, S = void> = {
+export type THandler<T, S = void> = (state: T, action: IPayloadAction<S>) => T;
+export type THandlers<T, S = void> = {
   [action: string]: THandler<T, S> | THandler<T, S>[];
 };
 

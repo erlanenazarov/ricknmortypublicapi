@@ -93,7 +93,7 @@ export const CharacterListContainer = (): JSX.Element => {
         ]}
       />
 
-      <div className={styles.filtersWr}>
+      <div className="filters-title">
         <Title level={3}>Browse characters</Title>
         <Filters
           name={FORM_NAME}

@@ -1,7 +1,55 @@
 .root {
   padding-top: 20px;
+  padding-bottom: 36px;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.counters {
+  width: 100%;
+  justify-content: center;
+  flex-flow: row wrap;
 }
 
 .imageWr {
   margin-bottom: 20px;
+  height: 450px;
+  overflow: hidden;
+  position: relative;
+}
+
+.imageWr img {
+  width: 100%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@media screen and (max-width: 900px) {
+  .imageWr {
+    height: 330px;
+  }
+}
+@media screen and (max-width: 690px) {
+  .imageWr {
+    height: 330px;
+  }
+}
+@media screen and (max-width: 608px) {
+  .imageWr {
+    height: 270px;
+  }
+}
+@media screen and (max-width: 590px) {
+  .imageWr {
+    height: 200px;
+  }
+}
+@media screen and (max-width: 455px) {
+  .imageWr {
+    height: 145px;
+  }
 }

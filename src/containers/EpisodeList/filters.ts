@@ -22,7 +22,7 @@ export const config: IFilterFormConfig<IFilterConfigContext>[] = [
     key: 'episode',
     name: 'episode',
     label: 'Episode',
-    placeholder: 'Enter episode title',
+    placeholder: 'Enter episode code',
     type: EFieldType.TEXT,
   },
 ];

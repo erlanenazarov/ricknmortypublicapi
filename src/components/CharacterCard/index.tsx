@@ -3,12 +3,10 @@ import cn from 'classnames';
 import Tag from 'antd/lib/tag';
 import Card from 'antd/lib/card';
 import Skeleton from 'antd/lib/skeleton';
-import {
-  ExclamationOutlined,
-  ManOutlined,
-  QuestionOutlined,
-  WomanOutlined,
-} from '@ant-design/icons';
+import ExclamationOutlined from '@ant-design/icons/ExclamationOutlined';
+import ManOutlined from '@ant-design/icons/ManOutlined';
+import QuestionOutlined from '@ant-design/icons/QuestionOutlined';
+import WomanOutlined from '@ant-design/icons/WomanOutlined';
 
 import { EGender } from 'store/characters/types';
 

@@ -42,3 +42,12 @@
   align-items: center;
 }
 
+@media screen and (max-width: 1000px) {
+  .characterRoot {
+    flex-flow: row wrap;
+  }
+
+  .previewWr {
+    width: 100%;
+  }
+}

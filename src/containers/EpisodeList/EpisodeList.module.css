@@ -3,13 +3,6 @@
   padding-bottom: 40px;
 }
 
-.filtersWr {
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: space-between;
-  align-items: center;
-}
-
 .pagination {
   display: flex;
   flex-flow: row nowrap;

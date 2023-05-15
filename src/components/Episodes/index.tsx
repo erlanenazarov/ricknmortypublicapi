@@ -55,6 +55,7 @@ export const Episodes = (props: IEpisodesProps): JSX.Element => {
           <Meta
             title={`[#${item.id}] ${item.name}`}
             description={<Text>Code: {item.episode}</Text>}
+            className={styles.episodeMeta}
           />
           <Tag color="blue">Air date: {item.air_date}</Tag>
         </ListItem>

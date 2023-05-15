@@ -351,3 +351,11 @@ template {
 #root {
   min-height: 100vh;
 }
+
+.filters-title {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}

@@ -4,6 +4,7 @@
     "target": "es2017",
     "module": "commonjs",
     "jsx": "preserve",
+    "types": ["jest", "jest-immutable-matchers"],
     "allowJs": true,
     "strict": true,
     "noImplicitAny": true,
