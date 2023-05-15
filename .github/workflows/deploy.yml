@@ -11,9 +11,9 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: "14.x"
+          node-version: "16.x"
       - run: yarn
-      - run: yarn run build
+      - run: yarn build
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v1
         with:
