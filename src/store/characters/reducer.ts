@@ -8,12 +8,14 @@ import {
   TCharactersStateHandler,
   IListCharactersSuccessPayload,
   ICharacterExpanded,
+  ICharacter,
 } from './types';
 import {
   LIST_CHARACTERS,
   CHARACTER_DETAIL,
   CHARACTER_DETAIL_CLEAR,
   LIST_CHARACTERS_CLEAR,
+  UPDATE_CHARACTER_DETAIL,
 } from './actions';
 import { initialState } from './initialState';
 
@@ -51,6 +53,16 @@ const setCharacterDetailData: TCharactersStateHandler<ICharacterExpanded> = (
 const clearCharacterDetailState: TCharactersStateHandler = state =>
   state.setIn(['detail', 'data'], null).setIn(['detail', 'error'], null);
 
+const updateCharacterDetail: TCharactersStateHandler<Partial<ICharacter>> = (
+  state,
+  action,
+) =>
+  Object.entries(action.payload).reduce(
+    (memo: TCharactersState, [key, value]): TCharactersState =>
+      memo.setIn(['detail', 'data', key], value),
+    state,
+  );
+
 export default createReducer<TCharactersState>(initialState, {
   [LIST_CHARACTERS.request]: setListCharactersLoading(true),
   [LIST_CHARACTERS.success]: [
@@ -66,4 +78,5 @@ export default createReducer<TCharactersState>(initialState, {
   [CHARACTER_DETAIL.failure]: setCharacterDetailLoading(false),
   [CHARACTER_DETAIL_CLEAR]: clearCharacterDetailState,
   [LIST_CHARACTERS_CLEAR]: clearListCharacterState,
+  [UPDATE_CHARACTER_DETAIL]: updateCharacterDetail,
 });
