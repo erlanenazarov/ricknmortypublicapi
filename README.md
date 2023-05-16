@@ -15,21 +15,7 @@
 - Верните начальное состояние файла `yarn.lock`: `~# git checkout yarn.lock`
 - Установите зависимости командой `~# yarn install`
 
-## Зависимости
+### Live Demo
 
-Зависимости, которые добавляют типы а так же относятся к разработке (Библиотеки тестирования, eslint и т.д.), сохраняем в `devDependencies` (Типы и прочие библиотеки для ведения разработки не нужны в минифицированном билде)
-
-```json
-{
-  "dependencies": {
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-scripts": "5.0.1",
-    "typescript": "4.8.4"
-  },
-  "devDependencies": {
-    "@types/react": "18.0.21",
-    "@types/react-dom": "18.0.6"
-  }
-}
-```
+- Сайт был задеплоен в GitHub Pages
+- Перейдите по [ссылке](https://erlanenazarov.github.io/ricknmortypublicapi/) и посмотрите живое демо сайта.
