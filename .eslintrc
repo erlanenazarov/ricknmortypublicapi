@@ -100,6 +100,11 @@
             "position": "after"
           },
           {
+            "pattern": "assets/**",
+            "group": "internal",
+            "position": "after"
+          },
+          {
             "pattern": "../../../**",
             "group": "parent",
             "position": "after"
@@ -120,7 +125,7 @@
         ],
         "newlines-between": "always"
       }
-    ],
+    ]
   },
   "settings": {
     "react": {

@@ -52,6 +52,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:ci": "react-scripts test --silent --watchAll=false",
+    "test:coverage": "react-scripts test --silent --watchAll=false --coverage",
     "eject": "react-scripts eject",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build"
@@ -80,7 +82,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn run test"
+      "pre-push": "yarn run test:coverage"
     }
   }
 }

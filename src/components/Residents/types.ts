@@ -4,4 +4,5 @@ export interface IResidentsProps {
   residents: ICharacter[];
   title?: string;
   isLoading?: boolean;
+  chunkSize?: number;
 }
