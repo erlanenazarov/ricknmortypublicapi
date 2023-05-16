@@ -5,6 +5,7 @@ import {
   IListCharactersRequestPayload,
   IGetCharacterRequestPayload,
   ICharacterExpanded,
+  ICharacter,
 } from './types';
 
 const STATE_KEY = '@characters';
@@ -21,6 +22,8 @@ export const CHARACTER_DETAIL = populateRequestActions(
   'CHARACTER_DETAIL',
 );
 export const CHARACTER_DETAIL_CLEAR = `${STATE_KEY}/CHARACTER_DETAIL_CLEAR`;
+
+export const UPDATE_CHARACTER_DETAIL = `${STATE_KEY}/UPDATE_CHARACTER_DETAIL`;
 
 export const listCharactersRequest =
   createAction<IListCharactersRequestPayload>(LIST_CHARACTERS.request);
@@ -42,3 +45,7 @@ export const characterDetailFailure = createAction<unknown>(
   CHARACTER_DETAIL.failure,
 );
 export const characterDetailClear = createAction(CHARACTER_DETAIL_CLEAR);
+
+export const updateCharacterDetail = createAction<Partial<ICharacter>>(
+  UPDATE_CHARACTER_DETAIL,
+);

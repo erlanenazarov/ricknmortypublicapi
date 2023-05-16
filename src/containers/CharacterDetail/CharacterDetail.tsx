@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Breadcrumb from 'antd/lib/breadcrumb';
@@ -33,6 +33,7 @@ import { useChunkView } from 'hooks/useChunkView';
 import { safeGet } from 'utils/safeGet';
 
 import { Preview } from './components/Preview';
+import { EditModal } from './components/EditModal';
 import styles from './CharacterDetail.module.css';
 
 const { Title } = Typography;
@@ -41,6 +42,8 @@ export const CharacterDetailContainer = (): JSX.Element => {
   const { id } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const [isEditOpen, setIsEditOpen] = useState(false);
 
   const isLoading = useSelector(makeSelectCharacterDetailLoading);
   const character = useSelector(makeSelectCharacterDetailData);
@@ -76,6 +79,14 @@ export const CharacterDetailContainer = (): JSX.Element => {
 
   const handleNavigateToEpisodePage = (id: string): void => {
     navigate(`${EPISODES_PAGE_URL}/${id}`);
+  };
+
+  const handleOpenModal = (): void => {
+    setIsEditOpen(true);
+  };
+
+  const handleCloseModal = (): void => {
+    setIsEditOpen(false);
   };
 
   useEffect(() => {
@@ -115,6 +126,12 @@ export const CharacterDetailContainer = (): JSX.Element => {
           <Preview isLoading={isLoading} image={safeGet(character, 'image')} />
 
           <InfoText isLoading={isLoading} items={infoDataItems} />
+
+          {!isLoading && (
+            <Button type="primary" onClick={handleOpenModal}>
+              Edit character
+            </Button>
+          )}
         </div>
         <div className={styles.infoRoot}>
           <Title level={2} className={styles.episodesHead}>
@@ -141,6 +158,14 @@ export const CharacterDetailContainer = (): JSX.Element => {
           )}
         </div>
       </div>
+
+      {character && (
+        <EditModal
+          isOpen={isEditOpen}
+          onClose={handleCloseModal}
+          character={character}
+        />
+      )}
     </div>
   );
 };

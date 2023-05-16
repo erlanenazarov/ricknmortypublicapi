@@ -7,7 +7,6 @@ import Card from 'antd/lib/card';
 import UserOutlined from '@ant-design/icons/UserOutlined';
 import RocketOutlined from '@ant-design/icons/RocketOutlined';
 import OrderedListOutlined from '@ant-design/icons/OrderedListOutlined';
-import backgroundTheme from 'assets/img/rnm.png';
 
 import { listCharactersRequest } from 'store/characters/actions';
 import {
@@ -24,6 +23,8 @@ import {
   makeSelectLocationsListCount,
   makeSelectLocationListLoading,
 } from 'store/locations/selectors';
+
+import backgroundTheme from 'assets/img/rnm.png';
 
 import styles from './Home.module.css';
 
