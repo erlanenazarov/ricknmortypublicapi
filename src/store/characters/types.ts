@@ -42,10 +42,10 @@ export interface ICharacter {
   type: string;
   gender: EGender;
   image: string;
-  location: ILocation;
 }
 
 export interface ICharacterExpanded extends ICharacter {
+  location: ILocation;
   origin: ILocation;
   episode: IEpisode[];
 }
