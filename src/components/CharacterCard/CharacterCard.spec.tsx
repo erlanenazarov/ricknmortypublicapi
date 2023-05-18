@@ -4,9 +4,15 @@ import { EGender, ECharacterStatus } from 'store/characters/types';
 
 import { CharacterCard } from './CharacterCard';
 
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(),
+  useDispatch: jest.fn(),
+}));
+
 describe('CharacterCard', () => {
   const mockImage = 'https://example.com/image.jpg';
   const defaultProps = {
+    id: '1',
     name: 'Rick Sanchez',
     image: mockImage,
     gender: EGender.MALE,

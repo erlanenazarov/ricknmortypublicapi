@@ -11,6 +11,7 @@ import { ICharacter } from 'store/characters/types';
 export interface ILocationState {
   list: TRecordOfRemoteDataModel<TRecordOfListResponseModel<ILocation>>;
   detail: TRecordOfRemoteDataModel<RecordOf<ILocationExpanded>>;
+  totalCount: TRecordOfRemoteDataModel<number>;
 }
 
 export type TLocationState = RecordOf<ILocationState>;

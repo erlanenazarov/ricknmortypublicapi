@@ -10,7 +10,10 @@ import { HOME_PAGE_URL, EPISODES_PAGE_URL } from 'configuration/routes';
 import { InfoText } from 'components/InfoText';
 import { Residents } from 'components/Residents';
 
-import { episodeDetailRequest } from 'store/episodes/actions';
+import {
+  episodeDetailRequest,
+  clearEpisodeDetail,
+} from 'store/episodes/actions';
 import {
   makeSelectEpisodeDetailLoading,
   makeSelectEpisodeDetailData,
@@ -34,9 +37,13 @@ export const EpisodeDetailContainer = (): JSX.Element => {
   const residents: ICharacter[] = safeGet(episode, 'characters', []);
 
   useEffect(() => {
-    if (id) {
-      dispatch(episodeDetailRequest({ id }));
-    }
+    if (!id) return;
+
+    dispatch(episodeDetailRequest({ id }));
+
+    return () => {
+      dispatch(clearEpisodeDetail());
+    };
   }, [id, dispatch]);
 
   return (

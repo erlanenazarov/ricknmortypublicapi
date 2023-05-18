@@ -4,6 +4,11 @@ import { EGender, ECharacterStatus } from 'store/characters/types';
 
 import { CharactersGrid } from './CharactersGrid';
 
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(),
+  useDispatch: jest.fn(),
+}));
+
 describe('CharactersGrid', () => {
   const mockRickImage = 'https://example.com/rick.jpg';
   const mockMortyImage = 'https://example.com/morty.jpg';

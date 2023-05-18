@@ -16,6 +16,7 @@ import {
   CHARACTER_DETAIL_CLEAR,
   LIST_CHARACTERS_CLEAR,
   UPDATE_CHARACTER_DETAIL,
+  CHARACTERS_TOTAL_COUNT,
 } from './actions';
 import { initialState } from './initialState';
 
@@ -63,6 +64,16 @@ const updateCharacterDetail: TCharactersStateHandler<Partial<ICharacter>> = (
     state,
   );
 
+const setCharactersTotalCountLoading =
+  (value: boolean): TCharactersStateHandler =>
+  state =>
+    state.setIn(['totalCount', 'fetching'], value);
+
+const setCharactersTotalCountData: TCharactersStateHandler<number> = (
+  state,
+  action,
+) => state.setIn(['totalCount', 'data'], action.payload);
+
 export default createReducer<TCharactersState>(initialState, {
   [LIST_CHARACTERS.request]: setListCharactersLoading(true),
   [LIST_CHARACTERS.success]: [
@@ -79,4 +90,10 @@ export default createReducer<TCharactersState>(initialState, {
   [CHARACTER_DETAIL_CLEAR]: clearCharacterDetailState,
   [LIST_CHARACTERS_CLEAR]: clearListCharacterState,
   [UPDATE_CHARACTER_DETAIL]: updateCharacterDetail,
+  [CHARACTERS_TOTAL_COUNT.request]: setCharactersTotalCountLoading(true),
+  [CHARACTERS_TOTAL_COUNT.success]: [
+    setCharactersTotalCountLoading(false),
+    setCharactersTotalCountData,
+  ],
+  [CHARACTERS_TOTAL_COUNT.failure]: setCharactersTotalCountLoading(false),
 });

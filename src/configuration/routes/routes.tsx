@@ -3,6 +3,7 @@ import UserOutlined from '@ant-design/icons/UserOutlined';
 import HomeOutlined from '@ant-design/icons/HomeOutlined';
 import RocketOutlined from '@ant-design/icons/RocketOutlined';
 import OrderedListOutlined from '@ant-design/icons/OrderedListOutlined';
+import HeartOutlined from '@ant-design/icons/HeartOutlined';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 
 import { HomeContainer } from 'containers/Home';
@@ -12,6 +13,7 @@ import { LocationListContainer } from 'containers/LocationList';
 import { LocationDetailContainer } from 'containers/LocationDetail';
 import { EpisodeListContainer } from 'containers/EpisodeList';
 import { EpisodeDetailContainer } from 'containers/EpisodeDetail';
+import { FavoritesContainer } from 'containers/Favorites';
 
 import { IRoute } from './types';
 import {
@@ -19,6 +21,7 @@ import {
   CHARACTERS_PAGE_URL,
   LOCATIONS_PAGE_URL,
   EPISODES_PAGE_URL,
+  FAVORITES_PAGE_URL,
 } from './constants';
 
 export const routes: IRoute[] = [
@@ -76,12 +79,19 @@ export const routes: IRoute[] = [
       },
     ],
   },
+  {
+    path: FAVORITES_PAGE_URL,
+    element: <FavoritesContainer />,
+    label: 'Favorites',
+    icon: <HeartOutlined />,
+    hiddenInNavbar: true,
+  },
 ];
 
-export const navbarItems: ItemType[] = routes.map(
-  ({ index, path, label, icon }) => ({
+export const navbarItems: ItemType[] = routes
+  .filter(({ hiddenInNavbar }) => !hiddenInNavbar)
+  .map(({ index, path, label, icon }) => ({
     key: index ? HOME_PAGE_URL : `${path}`,
     label,
     icon,
-  }),
-);
+  }));

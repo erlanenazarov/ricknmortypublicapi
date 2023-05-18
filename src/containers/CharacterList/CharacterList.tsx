@@ -18,7 +18,10 @@ import {
   makeSelectCharactersCount,
   makeSelectCharactersLoading,
 } from 'store/characters/selectors';
-import { listCharactersRequest } from 'store/characters/actions';
+import {
+  listCharactersRequest,
+  listCharactersClear,
+} from 'store/characters/actions';
 
 import { config, FORM_NAME } from './filters';
 import { submit, submitToQuery } from './submit';
@@ -77,6 +80,10 @@ export const CharacterListContainer = (): JSX.Element => {
   useEffect(
     () => {
       requestCharacters(getPage());
+
+      return () => {
+        dispatch(listCharactersClear());
+      };
     },
     // Need to call this effect only once at render, so empty deps array should be passed
     // eslint-disable-next-line

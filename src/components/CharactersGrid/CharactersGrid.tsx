@@ -30,6 +30,7 @@ export const CharactersGrid = (props: ICharactersGridProps): JSX.Element => {
       {characters.map(({ id, name, image, status, type, gender, species }) => (
         <div className={styles.gridItem} key={id}>
           <CharacterCard
+            id={id}
             image={image}
             name={name}
             status={status}

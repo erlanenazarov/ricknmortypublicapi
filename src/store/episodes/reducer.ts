@@ -14,6 +14,7 @@ import {
   EPISODE_DETAIL,
   CLEAR_EPISODE_DETAIL,
   CLEAR_LIST_EPISODES,
+  EPISODES_TOTAL_COUNT,
 } from './actions';
 import { initialState } from './initialState';
 
@@ -51,6 +52,16 @@ const setEpisodeDetailData: TEpisodesStateHandler<IEpisodeExpanded> = (
 const clearEpisodeDetailState: TEpisodesStateHandler = state =>
   state.setIn(['detail', 'data'], null).setIn(['detail', 'error'], null);
 
+const setEpisodesTotalCountLoading =
+  (value: boolean): TEpisodesStateHandler =>
+  state =>
+    state.setIn(['totalCount', 'fetching'], value);
+
+const setEpisodesTotalCountData: TEpisodesStateHandler<number> = (
+  state,
+  action,
+) => state.setIn(['totalCount', 'data'], action.payload);
+
 export default createReducer<TEpisodesState>(initialState, {
   [LIST_EPISODES.request]: setEpisodesListLoading(true),
   [LIST_EPISODES.success]: [setEpisodesListLoading(false), setEpisodesListData],
@@ -63,4 +74,10 @@ export default createReducer<TEpisodesState>(initialState, {
   ],
   [EPISODE_DETAIL.failure]: setEpisodeDetailLoading(false),
   [CLEAR_EPISODE_DETAIL]: clearEpisodeDetailState,
+  [EPISODES_TOTAL_COUNT.request]: setEpisodesTotalCountLoading(true),
+  [EPISODES_TOTAL_COUNT.success]: [
+    setEpisodesTotalCountLoading(false),
+    setEpisodesTotalCountData,
+  ],
+  [EPISODES_TOTAL_COUNT.failure]: setEpisodesTotalCountLoading(false),
 });

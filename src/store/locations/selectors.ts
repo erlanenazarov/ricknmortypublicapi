@@ -51,3 +51,12 @@ export const makeSelectLocationDetailData: TLocationStateSelectorReturnType<ILoc
       return value.toJS() as ILocationExpanded;
     },
   );
+
+export const makeSelectLocationsTotalCountLoading: TLocationStateSelectorReturnType<boolean> =
+  createSelector(
+    selectState,
+    extractValueFromState(['totalCount', 'fetching'], false),
+  );
+
+export const makeSelectLocationsTotalCountData: TLocationStateSelectorReturnType<number> =
+  createSelector(selectState, extractValueFromState(['totalCount', 'data'], 0));

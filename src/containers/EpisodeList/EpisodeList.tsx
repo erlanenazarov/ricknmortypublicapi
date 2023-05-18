@@ -15,7 +15,7 @@ import { Episodes } from 'components/Episodes';
 import { normalize } from 'containers/CharacterList/normalize';
 import { submit, submitToQuery } from 'containers/CharacterList/submit';
 
-import { listEpisodesRequest } from 'store/episodes/actions';
+import { listEpisodesRequest, clearListEpisodes } from 'store/episodes/actions';
 import {
   makeSelectListEpisodesLoading,
   makeSelectListEpisodesCount,
@@ -77,6 +77,10 @@ export const EpisodeListContainer = (): JSX.Element => {
   useEffect(
     () => {
       requestEpisodes(getPage());
+
+      return () => {
+        dispatch(clearListEpisodes());
+      };
     },
     // Need to call this effect only once
     // eslint-disable-next-line

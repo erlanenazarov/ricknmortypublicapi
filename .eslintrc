@@ -10,7 +10,7 @@
   ],
   "rules": {
     "eol-last": ["error", "always"],
-    "no-console": "warn",
+    "no-console": ["warn", { "allow": ["warn", "error"] }],
     "semi": ["error", "always"],
     "object-curly-spacing": ["error", "always"],
     "computed-property-spacing": ["error", "never"],
@@ -50,12 +50,12 @@
         ],
         "pathGroups": [
           {
-            "pattern": "api/**",
+            "pattern": "API/**",
             "group": "internal",
             "position": "after"
           },
           {
-            "pattern": "api",
+            "pattern": "API",
             "group": "internal",
             "position": "after"
           },

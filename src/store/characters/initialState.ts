@@ -18,4 +18,9 @@ export const initialState = createImmutableRecord<ICharactersState>({
     data: null,
     error: null,
   }),
+  totalCount: createImmutableRecord({
+    fetching: false,
+    data: 0,
+    error: null,
+  }),
 });

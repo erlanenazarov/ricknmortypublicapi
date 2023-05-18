@@ -1,14 +1,20 @@
-import { memo, ReactNode } from 'react';
+import { memo, ReactNode, SyntheticEvent } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 import Tag from 'antd/lib/tag';
 import Card from 'antd/lib/card';
 import Skeleton from 'antd/lib/skeleton';
+import Button from 'antd/lib/button';
 import ExclamationOutlined from '@ant-design/icons/ExclamationOutlined';
 import ManOutlined from '@ant-design/icons/ManOutlined';
 import QuestionOutlined from '@ant-design/icons/QuestionOutlined';
 import WomanOutlined from '@ant-design/icons/WomanOutlined';
+import HeartOutlined from '@ant-design/icons/HeartOutlined';
+import HeartFilled from '@ant-design/icons/HeartFilled';
 
 import { EGender } from 'store/characters/types';
+import { addFavorite, removeFromFavorite } from 'store/favorites/actions';
+import { makeSelectIsCachedItem } from 'store/favorites/selectors';
 
 import { safeGet } from 'utils/safeGet';
 
@@ -21,6 +27,7 @@ const { Image } = Skeleton;
 
 export const CharacterCard = memo((props: ICharacterCardProps): JSX.Element => {
   const {
+    id,
     name,
     image,
     gender,
@@ -32,6 +39,9 @@ export const CharacterCard = memo((props: ICharacterCardProps): JSX.Element => {
     onClick,
     testId,
   } = props;
+
+  const dispatch = useDispatch();
+  const isFavorite = useSelector(makeSelectIsCachedItem(id));
 
   const getGenderIcon = (): ReactNode => {
     const testId = 'gender-icon';
@@ -59,6 +69,12 @@ export const CharacterCard = memo((props: ICharacterCardProps): JSX.Element => {
     return <img loading="lazy" src={image} alt={name} />;
   };
 
+  const handleAddToFavorite = (e: SyntheticEvent): void => {
+    e.stopPropagation();
+
+    dispatch(isFavorite ? removeFromFavorite(id) : addFavorite(id));
+  };
+
   return (
     <Card
       data-testid={testId}
@@ -68,6 +84,13 @@ export const CharacterCard = memo((props: ICharacterCardProps): JSX.Element => {
       cover={getCoverImage()}
       onClick={onClick}
     >
+      <Button
+        type="primary"
+        shape="circle"
+        icon={isFavorite ? <HeartFilled /> : <HeartOutlined />}
+        onClick={handleAddToFavorite}
+        className={styles.favoriteButton}
+      />
       <Meta
         title={name}
         description={

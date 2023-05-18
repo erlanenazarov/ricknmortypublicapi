@@ -11,6 +11,11 @@ const STATE_KEY = '@episodes';
 
 export const LIST_EPISODES = populateRequestActions(STATE_KEY, 'LIST_EPISODES');
 
+export const EPISODES_TOTAL_COUNT = populateRequestActions(
+  STATE_KEY,
+  'EPISODES_TOTAL_COUNT',
+);
+
 export const CLEAR_LIST_EPISODES = `${STATE_KEY}/CLEAR_LIST_EPISODES`;
 
 export const EPISODE_DETAIL = populateRequestActions(
@@ -27,6 +32,18 @@ export const listEpisodesSuccess = createAction<ISuccessEpisodesListPayload>(
   LIST_EPISODES.success,
 );
 export const listEpisodesFailure = createAction(LIST_EPISODES.failure);
+
+export const episodesTotalCountRequest = createAction(
+  EPISODES_TOTAL_COUNT.request,
+);
+
+export const episodesTotalCountSuccess = createAction<number>(
+  EPISODES_TOTAL_COUNT.success,
+);
+
+export const episodesTotalCountFailure = createAction<unknown>(
+  EPISODES_TOTAL_COUNT.failure,
+);
 
 export const clearListEpisodes = createAction(CLEAR_LIST_EPISODES);
 

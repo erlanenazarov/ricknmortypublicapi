@@ -6,6 +6,9 @@ import Typography from 'antd/lib/typography';
 import Badge from 'antd/lib/badge';
 import Tag from 'antd/lib/tag';
 import Button from 'antd/lib/button';
+import Space from 'antd/lib/space';
+import HeartFilled from '@ant-design/icons/HeartFilled';
+import HeartOutlined from '@ant-design/icons/HeartOutlined';
 
 import {
   HOME_PAGE_URL,
@@ -26,6 +29,8 @@ import {
   makeSelectCharacterDetailLoading,
   makeSelectCharacterDetailData,
 } from 'store/characters/selectors';
+import { makeSelectIsCachedItem } from 'store/favorites/selectors';
+import { addFavorite, removeFromFavorite } from 'store/favorites/actions';
 import { IEpisode } from 'store/episodes/types';
 
 import { useChunkView } from 'hooks/useChunkView';
@@ -47,6 +52,7 @@ export const CharacterDetailContainer = (): JSX.Element => {
 
   const isLoading = useSelector(makeSelectCharacterDetailLoading);
   const character = useSelector(makeSelectCharacterDetailData);
+  const isFavorite = useSelector(makeSelectIsCachedItem(`${id}`));
   const episodes: IEpisode[] = safeGet(character, 'episode', []);
   const originId: string | null = safeGet(character, 'origin.id', null);
 
@@ -89,6 +95,12 @@ export const CharacterDetailContainer = (): JSX.Element => {
     setIsEditOpen(false);
   };
 
+  const handleAddToFavorite = (): void => {
+    if (!id) return;
+
+    dispatch(isFavorite ? removeFromFavorite(id) : addFavorite(id));
+  };
+
   useEffect(() => {
     if (id) {
       dispatch(characterDetailRequest({ id }));
@@ -128,9 +140,18 @@ export const CharacterDetailContainer = (): JSX.Element => {
           <InfoText isLoading={isLoading} items={infoDataItems} />
 
           {!isLoading && (
-            <Button type="primary" onClick={handleOpenModal}>
-              Edit character
-            </Button>
+            <Space size="large" direction="vertical">
+              <Button type="primary" onClick={handleOpenModal}>
+                Edit character
+              </Button>
+              <Button
+                type="primary"
+                icon={isFavorite ? <HeartFilled /> : <HeartOutlined />}
+                onClick={handleAddToFavorite}
+              >
+                {isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+              </Button>
+            </Space>
           )}
         </div>
         <div className={styles.infoRoot}>
