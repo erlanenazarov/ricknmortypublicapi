@@ -1,4 +1,5 @@
 import { takeLatest, put, call, all } from 'redux-saga/effects';
+
 import { client, characters } from 'API';
 
 import { IPayloadAction } from 'store/types';
@@ -16,6 +17,9 @@ import {
   CHARACTER_DETAIL,
   characterDetailSuccess,
   characterDetailFailure,
+  CHARACTERS_TOTAL_COUNT,
+  charactersTotalCountFailure,
+  charactersTotalCountSuccess,
 } from './actions';
 
 function* listCharacters(
@@ -41,6 +45,23 @@ function* listCharacters(
   }
 }
 
+function* charactersTotalCount() {
+  try {
+    const response: unknown = yield call(
+      client.cancelableRequest,
+      characters.getCount,
+    );
+
+    yield put(
+      charactersTotalCountSuccess(
+        safeGet(response, 'characters.info.count', 0),
+      ),
+    );
+  } catch (error) {
+    yield put(charactersTotalCountFailure(error));
+  }
+}
+
 function* characterDetail(action: IPayloadAction<IGetCharacterRequestPayload>) {
   const { id } = action.payload;
 
@@ -60,6 +81,7 @@ function* characterDetail(action: IPayloadAction<IGetCharacterRequestPayload>) {
 function* Saga() {
   yield all([
     takeLatest(LIST_CHARACTERS.request, listCharacters),
+    takeLatest(CHARACTERS_TOTAL_COUNT.request, charactersTotalCount),
     takeLatest(CHARACTER_DETAIL.request, characterDetail),
   ]);
 }

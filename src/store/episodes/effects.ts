@@ -1,4 +1,5 @@
 import { all, put, call, takeLatest } from 'redux-saga/effects';
+
 import { client, episodes } from 'API';
 
 import { IPayloadAction } from 'store/types';
@@ -12,10 +13,13 @@ import {
 import {
   LIST_EPISODES,
   EPISODE_DETAIL,
+  EPISODES_TOTAL_COUNT,
   listEpisodesFailure,
   listEpisodesSuccess,
   episodeDetailFailure,
   episodeDetailSuccess,
+  episodesTotalCountSuccess,
+  episodesTotalCountFailure,
 } from './actions';
 
 function* listEpisodes(action: IPayloadAction<IRequestEpisodesListPayload>) {
@@ -55,9 +59,25 @@ function* episodeDetail(action: IPayloadAction<IEpisodeDetailRequestPayload>) {
   }
 }
 
+function* episodesTotalCount() {
+  try {
+    const response: unknown = yield call(
+      client.cancelableRequest,
+      episodes.getCount,
+    );
+
+    yield put(
+      episodesTotalCountSuccess(safeGet(response, 'episodes.info.count', 0)),
+    );
+  } catch (error) {
+    yield put(episodesTotalCountFailure(error));
+  }
+}
+
 function* Saga() {
   yield all([
     takeLatest(LIST_EPISODES.request, listEpisodes),
+    takeLatest(EPISODES_TOTAL_COUNT.request, episodesTotalCount),
     takeLatest(EPISODE_DETAIL.request, episodeDetail),
   ]);
 }

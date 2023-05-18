@@ -12,6 +12,7 @@ import { IEpisode } from 'store/episodes/types';
 export interface ICharactersState {
   list: TRecordOfRemoteDataModel<TRecordOfListResponseModel<ICharacter>>;
   detail: TRecordOfRemoteDataModel<RecordOf<ICharacterExpanded>>;
+  totalCount: TRecordOfRemoteDataModel<number>;
 }
 
 export type TCharactersState = RecordOf<ICharactersState>;

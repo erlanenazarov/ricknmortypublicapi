@@ -1,0 +1,12 @@
+.root {
+  padding-top: 24px;
+  padding-bottom: 40px;
+}
+
+.showMoreWr {
+  margin-top: 24px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}

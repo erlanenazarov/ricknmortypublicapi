@@ -26,6 +26,16 @@ export const getList = gql`
   }
 `;
 
+export const getCount = gql`
+  query {
+    characters(page: 1) {
+      info {
+        count
+      }
+    }
+  }
+`;
+
 export const getDetail = gql`
   query ($id: ID!) {
     character(id: $id) {
@@ -58,5 +68,19 @@ export const getDetail = gql`
     name
     type
     dimension
+  }
+`;
+
+export const getByIds = gql`
+  query ($ids: [ID!]!) {
+    charactersByIds(ids: $ids) {
+      id
+      name
+      image
+      gender
+      status
+      species
+      type
+    }
   }
 `;

@@ -17,6 +17,16 @@ export const getList = gql`
   }
 `;
 
+export const getCount = gql`
+  query {
+    episodes(page: 1) {
+      info {
+        count
+      }
+    }
+  }
+`;
+
 export const getDetail = gql`
   query ($id: ID!) {
     episode(id: $id) {

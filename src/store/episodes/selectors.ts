@@ -51,3 +51,12 @@ export const makeSelectEpisodeDetailData: TEpisodesStateSelectorReturnType<IEpis
       return value.toJS() as IEpisodeExpanded;
     },
   );
+
+export const makeSelectEpisodesTotalCountLoading: TEpisodesStateSelectorReturnType<boolean> =
+  createSelector(
+    selectState,
+    extractValueFromState(['totalCount', 'fetching'], false),
+  );
+
+export const makeSelectEpisodesTotalCountData: TEpisodesStateSelectorReturnType<number> =
+  createSelector(selectState, extractValueFromState(['totalCount', 'data'], 0));

@@ -11,12 +11,14 @@ import { TFormState } from './forms/types';
 import { TCharactersState } from './characters/types';
 import { TLocationState } from './locations/types';
 import { TEpisodesState } from './episodes/types';
+import { TFavoritesState } from './favorites/types';
 
 export interface IAppState {
   characters: TCharactersState;
   locations: TLocationState;
   episodes: TEpisodesState;
   forms: TFormState;
+  favorites: TFavoritesState;
 }
 
 export interface ISagaTask {

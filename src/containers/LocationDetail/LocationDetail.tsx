@@ -9,7 +9,10 @@ import { HOME_PAGE_URL, LOCATIONS_PAGE_URL } from 'configuration/routes';
 import { InfoText } from 'components/InfoText';
 import { Residents } from 'components/Residents';
 
-import { locationDetailRequest } from 'store/locations/actions';
+import {
+  locationDetailRequest,
+  clearLocationDetail,
+} from 'store/locations/actions';
 import {
   makeSelectLocationDetailLoading,
   makeSelectLocationDetailData,
@@ -35,6 +38,10 @@ export const LocationDetailContainer = (): JSX.Element => {
     if (!id) return;
 
     dispatch(locationDetailRequest({ id }));
+
+    return () => {
+      dispatch(clearLocationDetail());
+    };
   }, [id, dispatch]);
 
   return (

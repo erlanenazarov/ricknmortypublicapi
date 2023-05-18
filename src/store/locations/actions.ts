@@ -19,6 +19,14 @@ export const LOCATION_DETAIL = populateRequestActions(
   'LOCATION_DETAIL',
 );
 
+export const LOCATIONS_TOTAL_COUNT = populateRequestActions(
+  STATE_KEY,
+  'LOCATIONS_TOTAL_COUNT',
+);
+
+export const CLEAR_LIST_LOCATIONS = `${STATE_KEY}/CLEAR_LIST_LOCATIONS`;
+export const CLEAR_LOCATION_DETAIL = `${STATE_KEY}/CLEAR_LOCATION_DETAIL`;
+
 export const listLocationsRequest = createAction<IRequestLocationPayload>(
   LIST_LOCATIONS.request,
 );
@@ -33,3 +41,16 @@ export const locationDetailSuccess = createAction<ILocationExpanded>(
   LOCATION_DETAIL.success,
 );
 export const locationDetailFailure = createAction(LOCATION_DETAIL.failure);
+
+export const locationsTotalCountRequest = createAction(
+  LOCATIONS_TOTAL_COUNT.request,
+);
+export const locationsTotalCountSuccess = createAction<number>(
+  LOCATIONS_TOTAL_COUNT.success,
+);
+export const locationsTotalCountFailure = createAction<unknown>(
+  LOCATIONS_TOTAL_COUNT.failure,
+);
+
+export const clearListLocations = createAction(CLEAR_LIST_LOCATIONS);
+export const clearLocationDetail = createAction(CLEAR_LOCATION_DETAIL);

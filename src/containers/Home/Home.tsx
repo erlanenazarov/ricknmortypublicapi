@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import Typography from 'antd/lib/typography';
 import Statistic from 'antd/lib/statistic';
 import Space from 'antd/lib/space';
@@ -8,20 +9,26 @@ import UserOutlined from '@ant-design/icons/UserOutlined';
 import RocketOutlined from '@ant-design/icons/RocketOutlined';
 import OrderedListOutlined from '@ant-design/icons/OrderedListOutlined';
 
-import { listCharactersRequest } from 'store/characters/actions';
 import {
-  makeSelectCharactersCount,
-  makeSelectCharactersLoading,
+  CHARACTERS_PAGE_URL,
+  LOCATIONS_PAGE_URL,
+  EPISODES_PAGE_URL,
+} from 'configuration/routes';
+
+import { charactersTotalCountRequest } from 'store/characters/actions';
+import {
+  makeSelectCharactersTotalCountLoading,
+  makeSelectCharactersTotalCountData,
 } from 'store/characters/selectors';
-import { listEpisodesRequest } from 'store/episodes/actions';
+import { episodesTotalCountRequest } from 'store/episodes/actions';
 import {
-  makeSelectListEpisodesCount,
-  makeSelectListEpisodesLoading,
+  makeSelectEpisodesTotalCountLoading,
+  makeSelectEpisodesTotalCountData,
 } from 'store/episodes/selectors';
-import { listLocationsRequest } from 'store/locations/actions';
+import { locationsTotalCountRequest } from 'store/locations/actions';
 import {
-  makeSelectLocationsListCount,
-  makeSelectLocationListLoading,
+  makeSelectLocationsTotalCountData,
+  makeSelectLocationsTotalCountLoading,
 } from 'store/locations/selectors';
 
 import backgroundTheme from 'assets/img/rnm.png';
@@ -32,28 +39,31 @@ const { Title, Paragraph } = Typography;
 
 export const HomeContainer = (): JSX.Element => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const charactersCount = useSelector(makeSelectCharactersCount);
-  const charactersLoading = useSelector(makeSelectCharactersLoading);
+  const charactersCount = useSelector(makeSelectCharactersTotalCountData);
+  const charactersLoading = useSelector(makeSelectCharactersTotalCountLoading);
 
-  const locationsCount = useSelector(makeSelectLocationsListCount);
-  const locationsLoading = useSelector(makeSelectLocationListLoading);
+  const locationsCount = useSelector(makeSelectLocationsTotalCountData);
+  const locationsLoading = useSelector(makeSelectLocationsTotalCountLoading);
 
-  const episodesCount = useSelector(makeSelectListEpisodesCount);
-  const episodesLoading = useSelector(makeSelectListEpisodesLoading);
+  const episodesCount = useSelector(makeSelectEpisodesTotalCountData);
+  const episodesLoading = useSelector(makeSelectEpisodesTotalCountLoading);
+
+  const handleNavigate = (path: string) => () => {
+    navigate(path, { replace: true });
+  };
 
   useEffect(
     () => {
       if (!charactersCount) {
-        dispatch(listCharactersRequest({ page: 1 }));
+        dispatch(charactersTotalCountRequest());
       }
-
       if (!locationsCount) {
-        dispatch(listLocationsRequest({ page: 1 }));
+        dispatch(locationsTotalCountRequest());
       }
-
       if (!episodesCount) {
-        dispatch(listEpisodesRequest({ page: 1 }));
+        dispatch(episodesTotalCountRequest());
       }
     },
     // Need to call this effect only once at render
@@ -77,7 +87,11 @@ export const HomeContainer = (): JSX.Element => {
       </Paragraph>
 
       <Space align="center" size="large" className={styles.counters}>
-        <Card bordered={false}>
+        <Card
+          bordered={false}
+          hoverable
+          onClick={handleNavigate(CHARACTERS_PAGE_URL)}
+        >
           <Statistic
             title="Characters"
             value={charactersCount}
@@ -85,7 +99,11 @@ export const HomeContainer = (): JSX.Element => {
             prefix={<UserOutlined />}
           />
         </Card>
-        <Card bordered={false}>
+        <Card
+          bordered={false}
+          hoverable
+          onClick={handleNavigate(LOCATIONS_PAGE_URL)}
+        >
           <Statistic
             title="Locations"
             value={locationsCount}
@@ -93,7 +111,11 @@ export const HomeContainer = (): JSX.Element => {
             prefix={<RocketOutlined />}
           />
         </Card>
-        <Card bordered={false}>
+        <Card
+          bordered={false}
+          hoverable
+          onClick={handleNavigate(EPISODES_PAGE_URL)}
+        >
           <Statistic
             title="Episodes"
             value={episodesCount}

@@ -1,7 +1,6 @@
 import { ICharacter } from 'store/characters/types';
 
-export interface ICharacterCardProps
-  extends Omit<ICharacter, 'id' | 'location'> {
+export interface ICharacterCardProps extends ICharacter {
   loading?: boolean;
   className?: string;
   onClick?: () => void;

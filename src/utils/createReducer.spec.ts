@@ -1,5 +1,4 @@
 import { RecordOf } from 'immutable';
-import * as matchers from 'jest-immutable-matchers';
 
 import { IPayloadAction, THandlers } from 'store/types';
 
@@ -17,10 +16,6 @@ const handler = (state: TState, action: IPayloadAction<number>) =>
   state.update('count', prev => prev + action.payload);
 
 describe('applyHandler', () => {
-  beforeEach(() => {
-    expect.extend(matchers);
-  });
-
   it('should return the state unchanged if the action type is not handled', () => {
     const handlers = {};
 

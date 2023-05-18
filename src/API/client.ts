@@ -6,7 +6,7 @@ import { CANCEL_PROMISE_KEY } from './constants';
 export class BaseGraphQLClient extends GraphQLClient {
   cancelableRequest = <T>(
     document: RequestDocument,
-    variables: Variables,
+    variables?: Variables,
   ): IPromiseCancelableBySaga<T> => {
     const abortController = new AbortController();
 

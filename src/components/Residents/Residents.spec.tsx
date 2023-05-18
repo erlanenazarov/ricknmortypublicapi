@@ -11,6 +11,11 @@ jest.mock('react-router-dom', () => ({
   useNavigate: jest.fn(),
 }));
 
+jest.mock('react-redux', () => ({
+  useSelector: jest.fn(),
+  useDispatch: jest.fn(),
+}));
+
 describe('Residents', () => {
   const residents: ICharacter[] = [
     {

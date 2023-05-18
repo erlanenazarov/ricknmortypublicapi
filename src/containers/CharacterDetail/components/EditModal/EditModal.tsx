@@ -24,8 +24,7 @@ export const EditModal = (props: IEditModalProps): JSX.Element => {
 
   const handleSubmit = () => {
     dispatch(updateCharacterDetail(submit(formValues)));
-    if (!onClose) return;
-    onClose();
+    handleClose();
   };
 
   const handleClose = () => {

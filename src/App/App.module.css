@@ -9,6 +9,14 @@
 .header {
   background: white;
   padding-inline: var(--app-spacing);
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.menu {
+  flex: 1 1 0;
 }
 
 .content {

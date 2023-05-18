@@ -14,7 +14,10 @@ import { TFormValues } from 'components/Form/types';
 import { submit } from 'containers/CharacterList/submit';
 import { normalize } from 'containers/CharacterList/normalize';
 
-import { listLocationsRequest } from 'store/locations/actions';
+import {
+  listLocationsRequest,
+  clearListLocations,
+} from 'store/locations/actions';
 import {
   makeSelectLocationListLoading,
   makeSelectLocationsListCount,
@@ -67,10 +70,14 @@ export const LocationListContainer = (): JSX.Element => {
   useEffect(
     () => {
       requestLocations(getPage());
+
+      return () => {
+        dispatch(clearListLocations());
+      };
     },
     // Need to call this effect only once at mount
     // eslint-disable-next-line
-    [dispatch],
+    [],
   );
 
   return (

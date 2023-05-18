@@ -51,3 +51,12 @@ export const makeSelectCharacterDetailData: TCharactersSelectorReturnType<IChara
       return value.toJS() as ICharacterExpanded;
     },
   );
+
+export const makeSelectCharactersTotalCountLoading: TCharactersSelectorReturnType<boolean> =
+  createSelector(
+    selectState,
+    extractValueFromState(['totalCount', 'fetching'], false),
+  );
+
+export const makeSelectCharactersTotalCountData: TCharactersSelectorReturnType<number> =
+  createSelector(selectState, extractValueFromState(['totalCount', 'data'], 0));
