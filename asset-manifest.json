@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/ricknmortypublicapi/static/css/main.07e46053.css",
+    "main.js": "/ricknmortypublicapi/static/js/main.5ad5ce71.js",
+    "static/media/rnm.png": "/ricknmortypublicapi/static/media/rnm.3686ac342e7763234246.png",
+    "index.html": "/ricknmortypublicapi/index.html",
+    "static/media/index.cjs": "/ricknmortypublicapi/static/media/index.433019db0fc741f26829.cjs",
+    "main.07e46053.css.map": "/ricknmortypublicapi/static/css/main.07e46053.css.map",
+    "main.5ad5ce71.js.map": "/ricknmortypublicapi/static/js/main.5ad5ce71.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.07e46053.css",
+    "static/js/main.5ad5ce71.js"
+  ]
+}
